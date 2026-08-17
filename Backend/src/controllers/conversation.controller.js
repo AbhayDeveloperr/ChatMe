@@ -34,6 +34,16 @@ async function createConversation(req, res) {
 }
 
 
+async function getConversations(req, res) {
+
+    const conversations = await conversationModel.find({
+        participants: req.user.id
+    }).populate("participants", "username email");
+
+    res.status(200).json({
+        conversations
+    });
+}
 
 
-module.exports = {createConversation};
+module.exports = {createConversation, getConversations};
