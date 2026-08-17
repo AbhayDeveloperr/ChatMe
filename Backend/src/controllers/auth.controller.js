@@ -91,5 +91,16 @@ async function logoutUser(req,res) {
 }
 
 
+async function getCurrentUser(req, res) {
 
-module.exports = {registerUser, loginUser, logoutUser}
+    const user = await userModel
+        .findById(req.user.id)
+        .select("-password");
+
+    res.status(200).json({
+        user
+    });
+}
+
+
+module.exports = {registerUser, loginUser, logoutUser, getCurrentUser}
