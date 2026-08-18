@@ -1,11 +1,49 @@
 import React from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 const Register = () => {
+
+    const navigate = useNavigate()
+
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
+
+    const handleRegister = async (e) => {
+
+    e.preventDefault();
+
+    try {
+        const response = await axios.post("http://localhost:3000/api/auth/register",
+            {
+                username,
+                email,
+                password
+            },
+            {
+                withCredentials: true
+            }
+        );
+
+        // console.log(response)
+        setMessage(response.data.message);
+
+        navigate("/login");
+
+    } catch (error) {
+        console.log(error)
+    }
+};
+
+
   return (
     <div className='h-screen bg-[#E3F2FD] flex justify-center items-center'>
             <div className='w-md bg-gray-100 border border-gray-100 p-8 rounded-md shadow'>
                 <h2 className="text-xl font-semibold text-black underline mb-4">Register your ChatMe Account</h2>
-                <form className='space-y-2'>
+                <form onSubmit={handleRegister} className='space-y-2'>
                     <div>
                         <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                         Username
@@ -14,6 +52,8 @@ const Register = () => {
                         type="text"
                         id="username"
                         name="username"
+                        value={username}
+                        onChange={(e)=> setUsername(e.target.value)}
                         required
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         />
@@ -26,6 +66,8 @@ const Register = () => {
                         type="email"
                         id="email"
                         name="email"
+                        value={email}
+                        onChange={(e)=> setEmail(e.target.value)}
                         required
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         />
@@ -38,16 +80,18 @@ const Register = () => {
                         type="password"
                         id="password"
                         name="password"
+                        value={password}
+                        onChange={(e)=> setPassword(e.target.value)}
                         required
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
                     
-                    {/* {message && (
+                    {message && (
                         <p className="text-lg text-center text-green-600">
                             {message}
                         </p>
-                    )} */}
+                    )}
 
                     <button
                         type="submit"
