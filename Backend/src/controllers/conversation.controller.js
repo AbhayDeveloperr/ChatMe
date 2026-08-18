@@ -35,13 +35,28 @@ async function createConversation(req, res) {
 
 
 async function getConversations(req, res) {
-
-    const conversations = await conversationModel.find({
+    
+    const conversations = await conversationModel
+    .find({
         participants: req.user.id
-    }).populate("participants", "username email");
+    })
+    .populate("participants", "username email");
+    
+    // Logged-in user ko chhodkar saamne wala user nikalna.
+    const result = conversations.map((conversation) => {
+
+        const otherUser = conversation.participants.find(
+            (user) => user._id.toString() !== req.user.id
+        );
+
+        return {
+            conversationId: conversation._id,
+            user: otherUser
+        };
+    });
 
     res.status(200).json({
-        conversations
+        conversations: result
     });
 }
 
