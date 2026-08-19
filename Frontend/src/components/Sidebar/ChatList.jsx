@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ChatList = () => {
+const ChatList = ({setSelectedChat}) => {
 
   const chats = [
     {
@@ -20,7 +20,7 @@ const ChatList = () => {
   return (
     <div>
       {chats.map((chat,index)=> (
-        <div key={index} className="px-4 py-3 border-b border-gray-200">
+        <div key={index} className="px-4 py-3 border-b border-gray-200"onClick={()=> {setSelectedChat(chat)}} >
           <h3 className="font-semibold">{chat.username}</h3>
           <p className="text-sm text-gray-500">{chat.lastMessage}</p>
         </div>

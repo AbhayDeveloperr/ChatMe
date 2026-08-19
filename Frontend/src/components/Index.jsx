@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sidebar from './Sidebar/Sidebar'
 import ChatWindow from './ChatWindow/ChatWindow'
 
 const Index = () => {
+
+    const [selectedChat, setSelectedChat] = useState(null);
+
   return (
     <div className='flex h-screen'>
-      <Sidebar/>
-      <ChatWindow />
+      <Sidebar  setSelectedChat = {setSelectedChat}/>
+      <ChatWindow selectedChat = {selectedChat} />
     </div>
     
   )
