@@ -2,7 +2,7 @@ import React from 'react'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import {BrowserRouter as Router , Routes , Route} from 'react-router-dom'
-import Sidebar from './components/Sidebar/Sidebar'
+import Index from './components/Index'
 
 const App = () => {
   return (
@@ -11,7 +11,7 @@ const App = () => {
         <Routes>
           <Route path='/register' element={<Register/>} />
           <Route path='/login' element={<Login/>} />
-          <Route path='/Chat' element={<Sidebar/>} />
+          <Route path='/chat' element={<Index/>} />
         </Routes>
       </Router>
     </div>
