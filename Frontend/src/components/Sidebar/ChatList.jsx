@@ -2,20 +2,6 @@ import React from 'react'
 
 const ChatList = ({setSelectedChat, conversations}) => {
 
-  const chats = [
-    {
-      username: "Guru",
-      lastMessage: "Hey, how are you?"
-    },
-    {
-      username: "Ashish",
-      lastMessage: "What's up?"
-    },
-    {
-      username: "Shreya",
-      lastMessage: "Hello!"
-    }
-  ]
 
   return (
   <div>
