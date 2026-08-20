@@ -28,6 +28,11 @@ const MessageInput = ({setMessages}) => {
           placeholder="Type a message..."
           value={message}
           onChange={(e)=> setMessage(e.target.value)}
+          onKeyDown={(e)=>{
+            if(e.key==="Enter"){
+              handleSend()
+            }
+          }}
           className="flex-1 px-4 py-2 bg-gray-100 rounded-lg outline-none"
         />
 
