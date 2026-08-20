@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    const navigate = useNavigate()
 
     const [loginInput, setLoginInput] = useState("");
     const [password, setPassword] = useState("");
@@ -28,6 +31,8 @@ const Login = () => {
         console.log(error);
         console.log(error.response?.data);
     }
+    
+    navigate("/chat")
 };
 
 
