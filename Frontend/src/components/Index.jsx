@@ -39,7 +39,7 @@ const Index = () => {
 
   return (
     <div className='flex h-screen'>
-      <Sidebar  setSelectedChat = {setSelectedChat} conversations = {conversations} />
+      <Sidebar  setSelectedChat = {setSelectedChat} conversations = {conversations} fetchConversations = {fetchConversations} />
       <ChatWindow selectedChat = {selectedChat} />
     </div>
     

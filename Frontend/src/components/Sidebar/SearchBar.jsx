@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axiosInstance from '../../utils/axios'
 
-const SearchBar = () => {
+const SearchBar = ({setSelectedChat , fetchConversations}) => {
 
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
@@ -21,6 +21,26 @@ const SearchBar = () => {
     }
   };
 
+  const handleCreateConversation = async (userId) => {
+    try {
+      const response = await axiosInstance.post("/conversations", {
+        receiverId: userId,
+      });
+
+      console.log(response.data);
+
+      setSelectedChat(response.data.conversation.otherUser);
+
+      fetchConversations();
+
+      setSearch("");
+      setUsers([]);
+
+    } catch (error) {
+      console.log(error.response?.data);
+    }
+  };
+
   return (
     <div className='p-4'>
         <input type="text" placeholder='Search user..' value={search} onChange={(e) => {
@@ -30,10 +50,10 @@ const SearchBar = () => {
 
         {users.length > 0 && (
           <div className="mt-2 bg-white border border-gray-200 rounded-lg shadow">
-            {users.map((user) => (
-              <div key={user._id} className="px-4 py-3 border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
-                <h3 className="font-medium">{user.username}</h3>
-                <p className="text-sm text-gray-500">{user.email}</p>
+            {users.map((chat) => (
+              <div key={chat.conversationId} onClick={() => handleCreateConversation(chat.user)} className="px-4 py-3 border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+                <h3 className="font-medium">{chat.user.username}</h3>
+                <p className="text-sm text-gray-500">{chat.user.email}</p>
               </div>
             ))}
           </div>
