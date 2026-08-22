@@ -21,25 +21,25 @@ const SearchBar = ({setSelectedChat , fetchConversations}) => {
     }
   };
 
-  const handleCreateConversation = async (userId) => {
-    try {
-      const response = await axiosInstance.post("/conversations", {
-        receiverId: userId,
-      });
+  // const handleCreateConversation = async (userId) => {
+  //   try {
+  //     const response = await axiosInstance.post("/conversations", {
+  //       receiverId: userId,
+  //     });
 
-      console.log(response.data);
+  //     console.log(response.data);
 
-      setSelectedChat(response.data.conversation.otherUser);
+  //     setSelectedChat(response.data.conversation.otherUser);
 
-      fetchConversations();
+  //     fetchConversations();
 
-      setSearch("");
-      setUsers([]);
+  //     setSearch("");
+  //     setUsers([]);
 
-    } catch (error) {
-      console.log(error.response?.data);
-    }
-  };
+  //   } catch (error) {
+  //     console.log(error.response?.data);
+  //   }
+  // };
 
   return (
     <div className='p-4'>
@@ -51,7 +51,7 @@ const SearchBar = ({setSelectedChat , fetchConversations}) => {
         {users.length > 0 && (
           <div className="mt-2 bg-white border border-gray-200 rounded-lg shadow">
             {users.map((chat) => (
-              <div key={chat._id} onClick={() => handleCreateConversation(chat._id)} className="px-4 py-3 border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+              <div key={chat._id}  className="px-4 py-3 border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
                 <h3 className="font-medium">{chat.username}</h3>
                 <p className="text-sm text-gray-500">{chat.email}</p>
               </div>
