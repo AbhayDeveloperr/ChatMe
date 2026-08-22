@@ -51,9 +51,9 @@ const SearchBar = ({setSelectedChat , fetchConversations}) => {
         {users.length > 0 && (
           <div className="mt-2 bg-white border border-gray-200 rounded-lg shadow">
             {users.map((chat) => (
-              <div key={chat.conversationId} onClick={() => handleCreateConversation(chat.user)} className="px-4 py-3 border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
-                <h3 className="font-medium">{chat.user.username}</h3>
-                <p className="text-sm text-gray-500">{chat.user.email}</p>
+              <div key={chat._id} onClick={() => handleCreateConversation(chat._id)} className="px-4 py-3 border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+                <h3 className="font-medium">{chat.username}</h3>
+                <p className="text-sm text-gray-500">{chat.email}</p>
               </div>
             ))}
           </div>
